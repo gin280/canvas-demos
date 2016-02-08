@@ -4,21 +4,11 @@ var gulp = require('gulp');
 
 var minifyHTML = require('gulp-minify-html');
 var	minifycss = require('gulp-minify-css');
-var	jshint = require('gulp-jshint');
 var	uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
-var	concat = require('gulp-concat');
-var	notify = require('gulp-notify');
-var	cache = require('gulp-cache');
-var connect = require('gulp-connect');
-var	livereload = require('gulp-livereload');
-var sourcemaps = require('gulp-sourcemaps');
-del = require('del');
-var server = require('gulp-server-livereload');
-var serve = require('gulp-serve');
+var del = require('del');
 var pngquant = require('imagemin-pngquant');
 var babel = require("gulp-babel");
-var react = require('gulp-react');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var browserSync = require('browser-sync');
@@ -167,13 +157,12 @@ gulp.task('default', ['clean'], function() {
 });
 
 //reload
-gulp.task('reload', ['clean'], function() {
+gulp.task('reload',  function() {
   gulp.run('watch','browser-sync');
 });
 
 //监听文件
 gulp.task('watch', function() {
-  livereload.listen();
 	// Watch .scss files
 	gulp.watch('app/postcss/**/*.css', ['postcss']);
 	// Watch .js files
@@ -184,17 +173,9 @@ gulp.task('watch', function() {
  gulp.watch(['./app/*.html'], ['html']);
 	});
 
-//serve
-gulp.task('connect', function() {
-  connect.server({
-    port: 8888,
-    root: 'app',
-    livereload: true
-  });
-});
+
 gulp.task('html', function () {
   gulp.src(['./app/*.html','./app/postcss/**/*','./app/src/**/*'])
-   .pipe(livereload());
 });
 
 //无刷新
