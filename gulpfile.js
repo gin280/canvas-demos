@@ -94,7 +94,7 @@ gulp.task('minify-html', function() {
 
 //es6编译
 gulp.task("jsx", function () {
-  return browserify("app/src/test.js")
+  return browserify("app/src/main.js")
     .transform("babelify")
     .bundle()
     .pipe(source('bundle.js'))
